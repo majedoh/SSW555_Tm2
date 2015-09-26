@@ -1,0 +1,34 @@
+
+package p03;
+
+import java.io.*;
+public class P03 {
+    
+
+    
+    public static void print_names_id (BufferedReader read) throws IOException{
+         System.out.println("ID\tName");
+     while (read.ready()){
+                String line= read.readLine();
+                if(line.contains("@")&& line.contains("INDI")){
+                String[] split = line.split(" ");
+                String id = split[1];
+                System.out.print(id);
+                line= read.readLine();
+                if(line.contains("NAME")){
+                split = line.split(" ");
+                System.out.println("\t"+split[2]+" "+split[3]);
+                }
+                }
+            }
+        System.out.println("------------------------\n");
+    }
+ 
+    public static void main(String[] args) throws Exception {
+            BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+            print_names_id(read);
+
+    }
+   
+    
+}
