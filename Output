@@ -1,0 +1,15 @@
+ID	Name
+@I1@	Majed /Hariri/
+@I2@	Rajja /Hajjar/
+@I3@	Amin /Hariri/
+@I4@	Hanan /Albaik/
+@I5@	Bakur /Hariri/
+@I6@	Khadija /Qurashi/
+@I7@	Nawaf /Hariri/
+@I8@	Lojan /Hariri/
+------------------------
+
+Family ID 	 Husband 	 Wife
+  @F1@ 		  Amin		Rajja
+  @F2@ 		  Amin		Hanan
+  @F3@ 		  Bakur		Khadija
