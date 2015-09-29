@@ -23,6 +23,39 @@ public class P03 {
             }
         System.out.println("------------------------\n");
     }
+    
+    public static void print_families (String [] id_collection, String [] name_collection) throws Exception{
+    BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+        System.out.println("Family ID \t Husband \t Wife");
+        while (read.ready()){
+         String line= read.readLine();
+         String [] split;
+         if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+             split = line.split(" ");
+             System.out.print("  "+split[1]+" \t\t");
+             line= read.readLine();
+             split = line.split(" ");
+             
+             int counter = 0;
+             while (!split[2].equals(id_collection[counter])){
+             counter ++;
+             }
+             System.out.print("  "+name_collection[counter]+"\t\t");
+             line= read.readLine();
+             split = line.split(" ");
+             counter = 0;
+             while (!split[2].equals(id_collection[counter])){
+             counter ++;
+             }
+             System.out.print(name_collection[counter]+"\n");
+             
+         
+         }
+        
+        }
+    
+    }
+
  
     public static void main(String[] args) throws Exception {
             BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
