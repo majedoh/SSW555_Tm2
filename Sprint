@@ -1,0 +1,138 @@
+
+package p02;
+import java.io.*;
+
+public class P02 {
+    
+
+    
+    public static void print_names_id (BufferedReader read) throws IOException, Exception{
+         System.out.println("ID\tName");
+         String [] id_collection=new String[5000];
+         String [] name_collection = new String [5000];
+         int counter = 0;
+     while (read.ready()){
+                String line= read.readLine();
+                if(line.contains("@")&& line.contains("INDI")){
+                String[] split = line.split(" ");
+                String id = split[1];
+                id_collection[counter]=id;
+                System.out.print(id);
+                line= read.readLine();
+                if(line.contains("NAME")){
+                split = line.split(" ");
+                System.out.println("\t"+split[2]+" "+split[3]);
+                name_collection[counter]=split[2];
+                }
+                counter++;
+                }
+            }
+        System.out.println("------------------------\n");
+        print_families(id_collection,name_collection);
+    }
+    
+    public static void US07 () throws Exception{
+    String [] name_collections = new String[100];
+    int [] birth_collectin= new int[100];
+    int [] Death_colection= new int[100];
+    int [] Age= new int[100];
+    String [] months_collections = new String[100];
+    int counter = 0;
+     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+    System.out.println("------------------------\n"); 
+     System.out.println("US07");   
+    System.out.println("Name\t\tStatus");
+    while (read.ready()){
+    String line= read.readLine();
+    String [] split;
+    if (line.contains("NAME")){
+    split = line.split(" ");
+    name_collections[counter]=split[2]+" "+split[3].replace("/", "");
+    read.readLine();
+    }//end of if
+    if(line.contains("BIRT")){
+    line =read.readLine();
+    split = line.split(" ");
+    months_collections[counter]=split[3];
+    birth_collectin[counter]=Integer.parseInt(split[4].trim());
+    line =read.readLine();
+    if (line.contains("DEAT")){
+    line = read.readLine();
+    split = line.split(" ");
+    Death_colection[counter]=Integer.parseInt(split[4].trim());
+    Age[counter]=Death_colection[counter]-birth_collectin[counter];
+    if (Age[counter]>150){System.out.println(name_collections[counter]+"\t"+"More Than 150 Years old");counter++;}else{
+    System.out.println(name_collections[counter]+"\t"+"Less Than 150 Years old");counter++;
+    }
+    }else{
+    Death_colection[counter]=0;
+    Age[counter]= 2015-birth_collectin[counter];
+    if (Age[counter]>150){System.out.println(name_collections[counter]+"\t"+"More Than 150 Years old");counter++;}else{
+    System.out.println(name_collections[counter]+"\t"+"Less Than 150 Years old");counter++;
+    }
+    }
+    }//end of second if
+    }//end of the loop
+    US27(name_collections,Age,counter);
+    US35(name_collections,birth_collectin, counter,months_collections);
+    US36(Death_colection,name_collections,months_collections,counter);
+    }
+    
+   public static void US27(String[] name_collections, int[] Age, int counter) {
+    System.out.println("------------------------\n"); 
+    System.out.println("US27");   
+    System.out.println("Name\t\t\tAge");
+    int internal_counter =0;
+    while (internal_counter<counter){
+        System.out.println(name_collections[internal_counter]+"\t\t"+Age[internal_counter]);
+        internal_counter++;
+    }
+    }
+    
+    
+    
+    public static void print_families (String [] id_collection, String [] name_collection) throws Exception{
+    BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+        System.out.println("Family ID \t Husband \t Wife");
+        while (read.ready()){
+         String line= read.readLine();
+         String [] split;
+         if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+             split = line.split(" ");
+             System.out.print("  "+split[1]+" \t\t");
+             line= read.readLine();
+             split = line.split(" ");
+             
+             int counter = 0;
+             while (!split[2].equals(id_collection[counter])){
+             counter ++;
+             }
+             System.out.print("  "+name_collection[counter]+"\t\t");
+             line= read.readLine();
+             split = line.split(" ");
+             counter = 0;
+             while (!split[2].equals(id_collection[counter])){
+             counter ++;
+             }
+             System.out.print(name_collection[counter]+"\n");
+             
+         
+         }
+        
+        }
+    
+    }
+    
+ 
+    public static void main(String[] args) throws Exception {
+            BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+            print_names_id(read);
+            age_checker ();
+
+    }
+
+ 
+
+ 
+    
+}
