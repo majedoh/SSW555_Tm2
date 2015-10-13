@@ -1,45 +1,10 @@
 
 package p02;
+
 import java.io.*;
 
 public class P02 {
-
-
-
-  public static void US35(String[] name_collections,int []birth_collectin, int counter,String [] months_collections){
-   System.out.println("------------------------\n"); 
-   System.out.println("US35");  
-   System.out.println("Name\t\t\tBirth");
-   int internal_counter =0;
-    while (internal_counter<counter){
-        if (birth_collectin[internal_counter]==2015&& months_collections[internal_counter].equalsIgnoreCase("SEP")){
-        System.out.println(name_collections[internal_counter]+"\t\t"+"DB is Less than 30 Days");
-        internal_counter++;
-        }
-        else{
-          System.out.println(name_collections[internal_counter]+"\t\t"+"DB is More than 30 Days");
-          internal_counter++;
-        }
-    }
-    }
-   
-   private static void US36(int[] Death_colection, String[] name_collections, String[] months_collections, int counter) {
-   System.out.println("------------------------\n"); 
-   System.out.println("US36");  
-   System.out.println("Name\t\t\tDeath");
-   int internal_counter =0;
-    while (internal_counter<counter){
-        if (Death_colection[internal_counter]==2015&& months_collections[internal_counter].equalsIgnoreCase("SEP")){
-        System.out.println(name_collections[internal_counter]+"\t\t"+"DD is Less than 30 Days");
-        internal_counter++;
-        }
-        else{
-          System.out.println(name_collections[internal_counter]+"\t\t"+"DD is More than 30 Days");
-          internal_counter++;
-        
-        }
-    }
-    }  
+    
 
     
     public static void print_names_id (BufferedReader read) throws IOException, Exception{
@@ -67,7 +32,7 @@ public class P02 {
         print_families(id_collection,name_collection);
     }
     
-    public static void US07 () throws Exception{
+    public static void age_checker () throws Exception{
     String [] name_collections = new String[100];
     int [] birth_collectin= new int[100];
     int [] Death_colection= new int[100];
@@ -112,6 +77,8 @@ public class P02 {
     US27(name_collections,Age,counter);
     US35(name_collections,birth_collectin, counter,months_collections);
     US36(Death_colection,name_collections,months_collections,counter);
+    US06();
+    US11();
     }
     
    public static void US27(String[] name_collections, int[] Age, int counter) {
@@ -122,6 +89,42 @@ public class P02 {
     while (internal_counter<counter){
         System.out.println(name_collections[internal_counter]+"\t\t"+Age[internal_counter]);
         internal_counter++;
+    }
+    }
+   
+   
+   public static void US35(String[] name_collections,int []birth_collectin, int counter,String [] months_collections){
+   System.out.println("------------------------\n"); 
+   System.out.println("US35");  
+   System.out.println("Name\t\t\tBirth");
+   int internal_counter =0;
+    while (internal_counter<counter){
+        if (birth_collectin[internal_counter]==2015&& months_collections[internal_counter].equalsIgnoreCase("SEP")){
+        System.out.println(name_collections[internal_counter]+"\t\t"+"DB is Less than 30 Days");
+        internal_counter++;
+        }
+        else{
+          System.out.println(name_collections[internal_counter]+"\t\t"+"DB is More than 30 Days");
+          internal_counter++;
+        }
+    }
+    }
+   
+   private static void US36(int[] Death_colection, String[] name_collections, String[] months_collections, int counter) {
+   System.out.println("------------------------\n"); 
+   System.out.println("US36");  
+   System.out.println("Name\t\t\tDeath");
+   int internal_counter =0;
+    while (internal_counter<counter){
+        if (Death_colection[internal_counter]==2015&& months_collections[internal_counter].equalsIgnoreCase("SEP")){
+        System.out.println(name_collections[internal_counter]+"\t\t"+"DD is Less than 30 Days");
+        internal_counter++;
+        }
+        else{
+          System.out.println(name_collections[internal_counter]+"\t\t"+"DD is More than 30 Days");
+          internal_counter++;
+        
+        }
     }
     }
     
@@ -160,7 +163,7 @@ public class P02 {
     }
     
     
-    public static void US06 () throws Exception  {
+      public static void US06 () throws Exception  {
     System.out.println("------------------------\n"); 
     System.out.println("US06");   
     System.out.print("Name\tStatues");
@@ -241,16 +244,12 @@ public class P02 {
     
     }
     
+    
  
     public static void main(String[] args) throws Exception {
             BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
             print_names_id(read);
-            age_checker ();
+            age_checker();
 
-    }
-
- 
-
- 
-    
+    } 
 }
