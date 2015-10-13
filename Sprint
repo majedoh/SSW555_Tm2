@@ -159,6 +159,88 @@ public class P02 {
     
     }
     
+    
+    public static void US06 () throws Exception  {
+    System.out.println("------------------------\n"); 
+    System.out.println("US06");   
+    System.out.print("Name\tStatues");
+    BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+     while (read.ready()){
+                String line= read.readLine();
+                if(line.contains("NAME")){
+                System.out.println();
+                String[] split = line.split(" ");
+                String name = split[2];
+                System.out.print( name);
+                line= read.readLine();
+                }
+                if(line.contains("DIV")){
+                System.out.print("\t"+" Divorced");
+                }
+            }
+
+        System.out.println("");
+        
+    }
+    
+    
+    
+    public static void US11 () throws Exception  {
+        BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+        String [] id = new String [40];
+        String [] family = new String [40];
+        String [] current = new String [40];
+        int id_counter=0, current_counter=0;
+        System.out.println("------------------------\n"); 
+        System.out.println("US11");
+        System.out.println("Do we have a bigamy ?");
+        while (read.ready()){
+         String line= read.readLine();
+         String [] split;
+         if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+             split = line.split(" ");
+             String DUMMY = split[1];
+             family[id_counter]= DUMMY;
+             line= read.readLine();
+             split = line.split(" ");
+             id[id_counter] = split[2];
+             id_counter++;
+             line= read.readLine();
+             split = line.split(" ");
+             id[id_counter] = split[2]; 
+             family [id_counter]=DUMMY;
+             while (read.ready()){
+             line = read.readLine();
+             if (line.contains("_CURRENT")){
+             split = line.split(" ");
+             while (current_counter < id_counter){
+             current[current_counter]=split[2];
+             current_counter++;
+             }
+             }
+             id_counter++;
+             }
+        
+        }
+    
+    
+        }
+             int counter =0,pointer=1, bi =0;
+         while (counter< id_counter){
+             while (pointer < id_counter){
+                if(id[counter].equals(id[pointer])&&current[pointer].equals(current[counter])){
+                        System.out.println("We have a Bigamy");
+                        bi=1;
+                    } 
+                pointer++;
+             }
+             counter++;
+         }
+         if (bi==0)
+          System.out.println("We No have a Bigamy");   
+    
+    }
+    
  
     public static void main(String[] args) throws Exception {
             BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
