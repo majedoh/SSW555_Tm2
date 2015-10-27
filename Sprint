@@ -537,3 +537,89 @@ public class P02 {
 
     } 
 }
+
+
+public static void US21 () throws Exception{
+    BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+    System.out.println("");
+    System.out.println("-----------------");
+    System.out.println("US21");
+        String [] ids = getId_id_collection_prime();
+        String [] gen = getGendars_collections();
+        int counter =0;
+         while (read.ready()){
+         String line= read.readLine();
+         String [] split;
+         if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+          split = line.split(" ");
+          System.out.println("  "+split[1]+" \t\t");
+          System.out.println("ROLE\t\tGendar");
+         } else if (line.contains("1")&& line.contains("@I")&&(line.contains("HUSB")||line.contains("WIFE"))){
+         split = line.split(" ");
+          while (ids.length>counter){
+             if (ids[counter].equals(split[2])){break;}
+         counter++;
+         }
+
+          if (line.contains("HUSB")&gen[counter].equals("M")){
+              System.out.println("HUSBAND"+"\t\t"+gen[counter]);
+              counter=0;
+          }else if(line.contains("HUSB")&gen[counter].equals("F")){
+          System.out.println("Error ! "+"HUSBAND"+"\t"+gen[counter]);
+          counter =0;
+          }
+          
+            if (line.contains("WIFE")&gen[counter].equals("F")){
+              System.out.println("WIFE"+"\t\t"+gen[counter]);
+              counter=0;
+          }else if(line.contains("WIFE")&gen[counter].equals("M")){
+          System.out.println("Error ! "+"WIFE"+"\t"+gen[counter]);
+          counter =0;
+          }
+                 
+                 }
+         counter=0;
+    }
+         
+         
+         
+        
+        }
+    public static void US16()throws Exception{
+     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+     System.out.println("------------------------\n");
+         System.out.println("US16");
+         String father ="";
+         String [] ids = getId_id_collection_prime();
+         String [] last_names = getLast_names();
+         String [] gen = getGendars_collections();
+          int counter =0;
+                 while (read.ready()){
+         String line= read.readLine();
+         String [] split;
+         if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+          split = line.split(" ");
+          System.out.println("  "+split[1]+" \t\t");
+          System.out.println("Lastname\tGendar");
+         } else if (line.contains("1")&& line.contains("@I")&&(line.contains("HUSB")||line.contains("WIFE")||line.contains("CHIL"))){
+         split = line.split(" ");
+          while (ids.length>counter){
+             if (ids[counter].equals(split[2])){break;}
+         counter++;
+         }
+          if (line.contains("HUSB"))
+              father=last_names[counter];
+          if (last_names[counter].equals(father)&&gen[counter].equals("M")){
+              System.out.println(last_names[counter]+"\t\t"+gen[counter]);
+              counter=0;
+          }else if((!last_names[counter].equals(father))&&gen[counter].equals("M")){
+          System.out.println("Error ! "+last_names[counter]+"\t"+gen[counter]);
+          counter =0;
+          }
+                 
+                 }
+         counter=0;
+    }
+    
+    
+    }
