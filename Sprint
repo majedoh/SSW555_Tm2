@@ -1,4 +1,3 @@
-
 package p02;
 
 import java.io.*;
@@ -10,6 +9,28 @@ public class P02 {
     static int [] mirrage_collections;
     static String [] names_collections;
     static int [] births_collections;
+    static String [] _last_names;
+    static String [] gendars_collections;
+
+    public static String[] getGendars_collections() {
+        return gendars_collections;
+    }
+
+    public static void setGendars_collections(String[] gendars_collections) {
+        P02.gendars_collections = gendars_collections;
+    }
+    
+    
+
+    public static String[] getLast_names() {
+        return _last_names;
+    }
+
+    public static void setLast_names(String[] _last_names) {
+        P02._last_names = _last_names;
+    }
+    
+    
 
     public static int[] getBirths_collections() {
         return births_collections;
@@ -65,23 +86,35 @@ public class P02 {
       //   System.out.println("ID\tName");
          String [] id_collection=new String[100];
          String [] name_collection = new String [100];
+         String [] gen = new String[100];
          int counter = 0;
+          String line;
      while (read.ready()){
-                String line= read.readLine();
-                if(line.contains("@")&& line.contains("INDI")){
+                line= read.readLine();
                 String[] split = line.split(" ");
+                if(line.contains("@")&& line.contains("INDI")){
+                 split = line.split(" ");
                 String id = split[1];
                 id_collection[counter]=id;
+                }
                // System.out.print(id);
-                line= read.readLine();
+             //   line= read.readLine();
+                
+                if (line.contains("SEX")){
+                split = line.split(" ");
+                gen[counter] = split[2];
+                setGendars_collections(gen);
+                counter++;
+                }
+                
                 if(line.contains("NAME")){
                 split = line.split(" ");
               //  System.out.println("\t"+split[2]+" "+split[3]);
                 name_collection[counter]=split[2];
                 }
-                counter++;
+            
                 }
-            }
+            
       //  System.out.println("------------------------\n");
         print_families(id_collection,name_collection);
         setId_id_collection_prime(id_collection);
@@ -90,6 +123,7 @@ public class P02 {
     public static void age_checker () throws Exception{
     String [] name_collections = new String[100];
     int [] birth_collectin= new int[100];
+    String [] last_name = new String [100];
     int [] Death_colection= new int[100];
     int [] mirrage_collection = new int[100];
     int [] Age= new int[100];
@@ -105,7 +139,9 @@ public class P02 {
     if (line.contains("NAME")){
     split = line.split(" ");
     name_collections[counter]=split[2];
+    last_name[counter]=split[3];
     setNames_collections(name_collections);
+    setLast_names(last_name);
     read.readLine();
     }//end of if
     if(line.contains("BIRT")){
@@ -153,6 +189,8 @@ public class P02 {
     US10();
     US26();
     US28();
+    US16();
+    US21();
     }
     
     
@@ -255,8 +293,6 @@ public class P02 {
             System.out.println("");
     
     }
-    
-    
    public static void US27(String[] name_collections, int[] Age, int counter) {
     System.out.println("------------------------\n"); 
     System.out.println("US27");   
@@ -267,8 +303,6 @@ public class P02 {
         internal_counter++;
     }
     }
-   
-   
    public static void US35(String[] name_collections,int []birth_collectin, int counter,String [] months_collections){
    System.out.println("------------------------\n"); 
    System.out.println("US35");  
@@ -285,7 +319,6 @@ public class P02 {
         }
     }
     }
-   
    private static void US36(int[] Death_colection, String[] name_collections, String[] months_collections, int counter) {
    System.out.println("------------------------\n"); 
    System.out.println("US36");  
@@ -303,9 +336,6 @@ public class P02 {
         }
     }
     }
-    
-    
-    
     public static void print_families (String [] id_collection, String [] name_collection) throws Exception{
     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
      //   System.out.println("Family ID \t Husband \t Wife");
@@ -336,11 +366,8 @@ public class P02 {
         
         }
     
-    }
-    
-    
-    
-      public static void US06 () throws Exception  {
+    }    
+    public static void US06 () throws Exception  {
     System.out.println("------------------------\n"); 
     System.out.println("US06");   
     System.out.print("Name\tStatues");
@@ -375,9 +402,6 @@ public class P02 {
        setDivorce_Date(temp);
         
     }
-    
-    
-    
     public static void US11 () throws Exception  {
         BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
         String [] id = new String [40];
@@ -433,8 +457,7 @@ public class P02 {
           System.out.println("We No have a Bigamy");   
     
     }
-    
-         public static void US26 () throws Exception{
+     public static void US26 () throws Exception{
          BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
          System.out.println("US26");
          String []ids = getId_id_collection_prime();String[]names=getNames_collections();
@@ -529,17 +552,7 @@ public class P02 {
      
      }
     
- 
-    public static void main(String[] args) throws Exception {
-            BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
-            print_names_id(read);
-            age_checker();
-
-    } 
-}
-
-
-public static void US21 () throws Exception{
+    public static void US21 () throws Exception{
     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
     System.out.println("");
     System.out.println("-----------------");
@@ -623,3 +636,11 @@ public static void US21 () throws Exception{
     
     
     }
+     
+    public static void main(String[] args) throws Exception {
+            BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+            print_names_id(read);
+            age_checker();
+
+    } 
+}
