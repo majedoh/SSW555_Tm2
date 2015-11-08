@@ -9,29 +9,51 @@ public class P02 {
     static int [] mirrage_collections;
     static String [] names_collections;
     static int [] births_collections;
+    static String [] months_collections;
     static String [] _last_names;
     static String [] gendars_collections;
+    static String [] Ids_family;
+    static int universal_counter;
 
+    public static String[] getMonths_collections() {
+        return months_collections;
+    }
+
+    public static void setMonths_collections(String[] months_collections) {
+        P02.months_collections = months_collections;
+    }
+
+    public static int getUniversal_counter() {
+        return universal_counter;
+    }
+
+    public static void setUniversal_counter(int universal_counter) {
+        P02.universal_counter = universal_counter;
+    }
+    
+
+    
+    public static void setIds_family(String[] Ids_family) {
+        P02.Ids_family = Ids_family;
+    }
+
+    public static String[] getIds_family() {
+        return Ids_family;
+    }
+
+    
     public static String[] getGendars_collections() {
         return gendars_collections;
     }
-
     public static void setGendars_collections(String[] gendars_collections) {
         P02.gendars_collections = gendars_collections;
-    }
-    
-    
-
+    }   
     public static String[] getLast_names() {
         return _last_names;
     }
-
     public static void setLast_names(String[] _last_names) {
         P02._last_names = _last_names;
-    }
-    
-    
-
+    }    
     public static int[] getBirths_collections() {
         return births_collections;
     }
@@ -79,11 +101,8 @@ public class P02 {
     public static void setId_id_collection_prime(String[] id_id_collection_prime) {
         P02.id_id_collection_prime = id_id_collection_prime;
     }
-    
-
-    
     public static void print_names_id (BufferedReader read) throws IOException, Exception{
-      //   System.out.println("ID\tName");
+       //  System.out.println("ID\tName");
          String [] id_collection=new String[100];
          String [] name_collection = new String [100];
          String [] gen = new String[100];
@@ -96,9 +115,8 @@ public class P02 {
                  split = line.split(" ");
                 String id = split[1];
                 id_collection[counter]=id;
+              //  System.out.print(id);
                 }
-               // System.out.print(id);
-             //   line= read.readLine();
                 
                 if (line.contains("SEX")){
                 split = line.split(" ");
@@ -109,17 +127,17 @@ public class P02 {
                 
                 if(line.contains("NAME")){
                 split = line.split(" ");
-              //  System.out.println("\t"+split[2]+" "+split[3]);
+              //  System.out.println("\t"+split[2]);
                 name_collection[counter]=split[2];
                 }
             
                 }
             
       //  System.out.println("------------------------\n");
+        setUniversal_counter(counter);
         print_families(id_collection,name_collection);
         setId_id_collection_prime(id_collection);
     }
-    
     public static void age_checker () throws Exception{
     String [] name_collections = new String[100];
     int [] birth_collectin= new int[100];
@@ -148,6 +166,7 @@ public class P02 {
     line =read.readLine();
     split = line.split(" ");
     months_collections[counter]=split[3];
+        setMonths_collections(months_collections);
     birth_collectin[counter]=Integer.parseInt(split[4].trim());
     line =read.readLine();
     if (line.contains("MARR")){
@@ -185,17 +204,101 @@ public class P02 {
    // US06();
    //  US11();
     setBirths_collections(birth_collectin);
-    US08(birth_collectin,Death_colection);
-    US10();
-    US26();
-    US28();
-    US16();
-    US21();
+  //  US08(birth_collectin,Death_colection);
+   // US10();
+    //US26();
+    //US28();
+    //US16();
+    //US21();
+    
+    //Sprint 3
+        US22();
+        US38();
     }
     
     
+    public static void US22()throws Exception{
+       BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+       System.out.println("------------------------"); 
+      System.out.println("US22");   
+         System.out.println("ID\tUniqe");
+         String [] id_collection=getId_id_collection_prime();
+         String [] family_id_collection = new String[100];
+         int counter = 0;
+          String line;
+     while (read.ready()){
+                line= read.readLine();
+                String[] split = line.split(" ");
+                if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+                split = line.split(" ");
+                family_id_collection[counter]=split[1];
+              //  System.out.print(family_id_collection[counter]);
+                setIds_family(family_id_collection);
+                counter++;
+                }
+               
+                
+                }
+     int temp = 0,inside_loop=0;
+     boolean enter;
+     while (temp<getUniversal_counter()){
+         enter = true;
+         inside_loop=0;
+         while (inside_loop<getUniversal_counter()){
+         if (id_collection[temp].equals(id_collection[inside_loop])&&inside_loop!=temp){
+             System.out.println(id_collection[temp]+"\t"+"NOT Uniqe");
+             inside_loop++;
+             enter = false;
+         }
+         inside_loop++;
+         }
+         if (enter == true)
+             System.out.println(id_collection[temp]+"\t"+"Uniqe");
+          temp++;
+     }
+     
+     temp = 0;
+     inside_loop=0;
+     while (temp<counter){
+         enter = true;
+         inside_loop=0;
+         while (inside_loop<counter){
+         if (family_id_collection[temp].equals(family_id_collection[inside_loop])&&inside_loop!=temp){
+             System.out.println(family_id_collection[temp]+"\t"+"NOT Uniqe");
+             inside_loop++;
+             enter = false;
+         }
+         inside_loop++;
+         }
+         if (enter == true)
+             System.out.println(family_id_collection[temp]+"\t"+"Uniqe");
+          temp++;
+     }
+     
+        
     
-     public static void US10()throws Exception{
+    
+    }
+    public static void US38()throws Exception{
+       System.out.println("------------------------\n"); 
+   System.out.println("US38");  
+   System.out.println("Name\t\t\tBirthday");
+   
+   int counter =0;
+   
+   while (counter < universal_counter){
+       if (months_collections[counter].equalsIgnoreCase("NOV")|| months_collections[counter].equalsIgnoreCase("DEC"))
+          System.out.println(names_collections[counter]+"\t\t\t"+months_collections[counter]+"   ( Your Birthday in the next 30 Day Congrats :) )");
+       else
+          System.out.println(names_collections[counter]+"\t\t\t"+months_collections[counter]); 
+   counter++;
+   
+   }
+    
+    }
+    
+    
+    public static void US10()throws Exception{
          System.out.println("------------------------\n"); 
          System.out.println("US10"); 
           System.out.println("Name\t\tAge At mirrage"); 
@@ -215,9 +318,7 @@ public class P02 {
          }
          
         System.out.println("------------------------\n");  
-     }
-    
-    
+     }  
     public static void US08( int[] birth_collectin, int[] Death_colection) throws Exception {
     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
     System.out.println("US08"); 
@@ -293,7 +394,7 @@ public class P02 {
             System.out.println("");
     
     }
-   public static void US27(String[] name_collections, int[] Age, int counter) {
+    public static void US27(String[] name_collections, int[] Age, int counter) {
     System.out.println("------------------------\n"); 
     System.out.println("US27");   
     System.out.println("Name\t\t\tAge");
@@ -303,7 +404,7 @@ public class P02 {
         internal_counter++;
     }
     }
-   public static void US35(String[] name_collections,int []birth_collectin, int counter,String [] months_collections){
+    public static void US35(String[] name_collections,int []birth_collectin, int counter,String [] months_collections){
    System.out.println("------------------------\n"); 
    System.out.println("US35");  
    System.out.println("Name\t\t\tBirth");
@@ -319,7 +420,7 @@ public class P02 {
         }
     }
     }
-   private static void US36(int[] Death_colection, String[] name_collections, String[] months_collections, int counter) {
+    private static void US36(int[] Death_colection, String[] name_collections, String[] months_collections, int counter) {
    System.out.println("------------------------\n"); 
    System.out.println("US36");  
    System.out.println("Name\t\t\tDeath");
@@ -457,7 +558,7 @@ public class P02 {
           System.out.println("We No have a Bigamy");   
     
     }
-     public static void US26 () throws Exception{
+    public static void US26 () throws Exception{
          BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
          System.out.println("US26");
          String []ids = getId_id_collection_prime();String[]names=getNames_collections();
@@ -503,7 +604,7 @@ public class P02 {
         }//end of the loop
          System.out.println("-----------------------");
      }
-     public static void US28 () throws Exception{
+    public static void US28 () throws Exception{
      BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
          System.out.println("US28");
          String []ids = getId_id_collection_prime();String[]names=getNames_collections();
@@ -550,8 +651,7 @@ public class P02 {
           }
         
      
-     }
-    
+     } 
     public static void US21 () throws Exception{
     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
     System.out.println("");
@@ -636,7 +736,6 @@ public class P02 {
     
     
     }
-     
     public static void main(String[] args) throws Exception {
             BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
             print_names_id(read);
