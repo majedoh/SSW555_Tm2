@@ -119,6 +119,7 @@ public class P02 {
          String [] id_collection=new String[100];
          String [] name_collection = new String [100];
          String [] gen = new String[100];
+         int [] div_collection = new int [100];
          int counter = 0;
           String line;
      while (read.ready()){
@@ -138,11 +139,21 @@ public class P02 {
                 counter++;
                 }
                 
+                
+                if (line.contains("DIV")){
+                line= read.readLine();
+                split = line.split(" ");
+                div_collection[counter] = Integer.parseInt(split[2]);
+                setDivorce_Date(div_collection);
+                
+                }
+                
                 if(line.contains("NAME")){
                 split = line.split(" ");
               //  System.out.println("\t"+split[2]);
                 name_collection[counter]=split[2];
                 }
+                
             
                 }
             
@@ -231,6 +242,8 @@ public class P02 {
         US38();
         US29();
         US31();
+        US03();
+        US04();
     }
     
     
@@ -346,8 +359,48 @@ public class P02 {
     }
     }
     
-    
-    
+    public static void US03()throws Exception{
+   System.out.println("------------------------\n"); 
+   System.out.println("US03");  
+   System.out.println("Name\t\tBirth\t\tDeath");
+   int counter =0;
+   while (counter < universal_counter){
+       if (Death_colection[counter]!=0){
+       if (Death_colection[counter]<births_collections[counter]){
+        System.out.println("ERROR!"+names_collections[counter]+"\t\tERROR"+births_collections[counter]+"\t\tERROR"+Death_colection[counter]);
+       }
+       else
+       System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\t"+Death_colection[counter]);
+       }else
+           System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\tAlive");
+       
+       
+   counter++;
+   }
+   
+    }
+    public static void US04()throws Exception{
+   System.out.println("------------------------\n"); 
+   System.out.println("US04");  
+   System.out.println("Name\t\tMirrage\t\tDivorce");
+   int counter =0;
+   while (counter < universal_counter){
+   if (mirrage_collections[counter]!=0){
+   if (Divorce_Date[counter]!=0){
+       if (Divorce_Date[counter]<mirrage_collections[counter])
+           System.out.println("ERROR!"+names_collections[counter]+"\t\tERROR!"+mirrage_collections[counter]+"\t\tERROR!"+Divorce_Date[counter]);
+       else
+   System.out.println(names_collections[counter]+"\t\t"+mirrage_collections[counter]+"\t\t"+Divorce_Date[counter]);
+   }else{
+       System.out.println(names_collections[counter]+"\t\t"+mirrage_collections[counter]+"\t\tStill Mirried");
+   }
+   }else{
+   System.out.println(names_collections[counter]+"\t\tNOt Mirried"+"\tNOt Mirried");
+   }
+   counter++;
+   }
+   
+    }
     
     
     public static void US10()throws Exception{
