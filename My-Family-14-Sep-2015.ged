@@ -1,18 +1,6 @@
 0 HEAD
-1 SOUR Family Echo
-2 WWW http://www.familyecho.com/
-1 FILE My Family
-1 DATE 14 SEP 2015
-1 DEST ANSTFILE
-1 GEDC
-2 VERS 5.5.1
-2 FORM LINEAGE-LINKED
-1 SUBM @I1@
-2 NAME Majed Hariri
-1 SUBN
-1 CHAR UTF-8
 0 @I1@ INDI
-1 NAME Majed /Hariri/
+1 NAME Majed Hariri
 2 GIVN Majed
 2 SURN Hariri
 2 _MARNM Hariri
@@ -21,35 +9,35 @@
 2 DATE 21 APR 1990
 1 FAMC @F1@
 0 @I2@ INDI
-1 NAME Rajja /Hajjar/
+1 NAME Rajja Hajjar
 2 GIVN Rajja
 2 SURN Hajjar
 2 _MARNM Hariri
-1 SEX F
 1 BIRT
 2 DATE 3 APR 1973
 1 MARR
 2 DATE 1990
 1 DIV 
 2 DATE 2001
+1 SEX F
 1 FAMS @F1@
 0 @I3@ INDI
-1 NAME Amin /Hariri/
+1 NAME Amin Hariri
 2 GIVN Amin
 2 SURN Hariri
 2 _MARNM Hariri
-1 SEX M
 1 BIRT
 2 DATE 2 FEB 1970
 1 MARR
 2 DATE 1990
 1 DIV 
-2 DATE 2001
+2 DATE 1989
+1 SEX M
 1 FAMS @F1@
 1 FAMS @F2@
 1 FAMC @F3@
 0 @I4@ INDI
-1 NAME Hanan /Albaik/
+1 NAME Hanan Albaik
 2 GIVN Hanan
 2 SURN Albaik
 2 _MARNM Hariri
@@ -60,11 +48,11 @@
 2 DATE 2002
 1 FAMS @F2@
 0 @I5@ INDI
-1 NAME Bakur /Hariri/
+1 NAME Bakur Hariri
 2 GIVN Bakur
 2 SURN Hariri
 2 _MARNM Hariri
-1 SEX M
+1 SEX F
 1 BIRT
 2 DATE 6 APR 1850
 1 MARR
@@ -73,7 +61,7 @@
 2 DATE 11 APR 1900
 1 FAMS @F3@
 0 @I6@ INDI
-1 NAME Khadija /Qurashi/
+1 NAME Khadija Qurashi
 2 GIVN Khadija
 2 SURN Qurashi
 2 _MARNM Hariri
@@ -83,19 +71,28 @@
 1 MARR
 2 DATE 1864
 1 DEAT Y
-2 DATE 8 MAR 1906
+2 DATE 8 MAR 1806
 1 FAMS @F3@
 0 @I7@ INDI
-1 NAME Nawaf /Hariri/
+1 NAME Nawaf Zero
 2 GIVN Nawaf
 2 SURN Zero
 2 _MARNM Hariri
 1 SEX M
 1 BIRT
-2 DATE 6 MAY 1980
+2 DATE 6 MAY 1970
 1 FAMC @F1@
 0 @I8@ INDI
-1 NAME Lojan /Hariri/
+1 NAME Naif Hariri
+2 GIVN Lojan
+2 SURN Hariri
+2 _MARNM Hariri
+1 SEX M
+1 BIRT
+2 DATE 4 NOV 1995
+1 FAMC @F2@
+0 @I8@ INDI
+1 NAME Lojan Hariri
 2 GIVN Lojan
 2 SURN Hariri
 2 _MARNM Hariri
@@ -112,6 +109,7 @@
 0 @F2@ FAM
 1 HUSB @I3@
 1 WIFE @I4@
+1 CHIL @I8@
 1 CHIL @I8@
 1 _CURRENT Y
 0 @F3@ FAM
