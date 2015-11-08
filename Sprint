@@ -5,7 +5,7 @@ import java.io.*;
 public class P02 {
     
     static String [] id_id_collection_prime;
-    static int [] Divorce_Date= new int[100];
+    static int [] Divorce_Date;
     static int [] mirrage_collections;
     static String [] names_collections;
     static int [] births_collections;
@@ -14,6 +14,17 @@ public class P02 {
     static String [] gendars_collections;
     static String [] Ids_family;
     static int universal_counter;
+    static int [] Death_colection;
+
+    public static int[] getDeath_colection() {
+        return Death_colection;
+    }
+
+    public static void setDeath_colection(int[] Death_colection) {
+        P02.Death_colection = Death_colection;
+    }
+    
+    
 
     public static String[] getMonths_collections() {
         return months_collections;
@@ -23,6 +34,8 @@ public class P02 {
         P02.months_collections = months_collections;
     }
 
+
+    
     public static int getUniversal_counter() {
         return universal_counter;
     }
@@ -180,6 +193,7 @@ public class P02 {
     line = read.readLine();
     split = line.split(" ");
     Death_colection[counter]=Integer.parseInt(split[4].trim());
+    setDeath_colection(Death_colection);
     Age[counter]=Death_colection[counter]-birth_collectin[counter];
     if (Age[counter]>150){//System.out.println(name_collections[counter]+"\t"+"More Than 150 Years old");
         counter++;}else{
@@ -188,6 +202,7 @@ public class P02 {
     }
     }else{
     Death_colection[counter]=0;
+    setDeath_colection(Death_colection);
     Age[counter]= 2015-birth_collectin[counter];
     if (Age[counter]>150){
        // System.out.println(name_collections[counter]+"\t"+"More Than 150 Years old");
@@ -214,6 +229,8 @@ public class P02 {
     //Sprint 3
         US22();
         US38();
+        US29();
+        US31();
     }
     
     
@@ -280,7 +297,7 @@ public class P02 {
     
     }
     public static void US38()throws Exception{
-       System.out.println("------------------------\n"); 
+   System.out.println("------------------------\n"); 
    System.out.println("US38");  
    System.out.println("Name\t\t\tBirthday");
    
@@ -296,6 +313,41 @@ public class P02 {
    }
     
     }
+    
+    public static void US29()throws Exception{
+   System.out.println("------------------------\n"); 
+   System.out.println("US29");  
+   System.out.println("Name\t\t\tList of all deceased");
+   int counter = 0;
+   while (counter < universal_counter){
+   if (Death_colection[counter]!=0){
+       System.out.println(names_collections[counter]+"\t\t\tDead in :"+Death_colection[counter]);
+   }else{
+    System.out.println(names_collections[counter]+"\t\t\tNOT Dead");
+   }
+   counter++;
+   }
+    }
+    public static void US31()throws Exception{
+         System.out.println("------------------------\n"); 
+   System.out.println("US31");  
+   System.out.println("Name\t\t\tList of singles over 30");
+   int counter = 0;
+    while (counter<universal_counter){
+    if (mirrage_collections[counter]==0){
+    if ((2015-births_collections[counter]) >= 30){
+        System.out.println(names_collections[counter]+"\t\t\tSingle in Age = "+(2015-births_collections[counter]));
+    }else{
+        System.out.println(names_collections[counter]+"\t\t\tless than 30");
+    }
+    }else
+        System.out.println(names_collections[counter]+"\t\t\tMarried");
+    counter++;
+    }
+    }
+    
+    
+    
     
     
     public static void US10()throws Exception{
