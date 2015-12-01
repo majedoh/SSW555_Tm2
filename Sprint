@@ -248,7 +248,102 @@ public class P02 {
     // Sprint 4
     US05();
     US09();
+    US12();
+    US15();
     }
+    
+    
+         public static void US12()throws Exception{
+     String [] IDs =getId_id_collection_prime();
+     System.out.println("------------------------\n"); 
+     System.out.println("US12");  
+     System.out.println("Name\t\tBirth\t\tFather's Age\tMother's Age");
+     int counter = 0;
+     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+     String line="";
+          while (read.ready()){
+               counter= 0;
+              line= read.readLine();
+             if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+                 line= read.readLine();
+                 String []  splits = line.split(" ");
+                 String father = splits[2];
+                 line= read.readLine();
+                 splits = line.split(" ");
+                 String mother = splits[2];
+                 while (!IDs[counter].equals(father)){
+                     counter++;
+                 }
+                 int father_birth = births_collections[counter];
+                 int father_death = Death_colection[counter];
+                 counter = 0;
+                  while (!IDs[counter].equals(mother)){
+                     counter++;
+                 }
+                 int mother_birth = births_collections[counter];
+                 int mother_death = Death_colection[counter];
+                  counter = 0;
+                 line= read.readLine();
+                 while (line.contains("CHIL")){
+                     splits = line.split(" ");
+                      while (!IDs[counter].equals(splits[2])){
+                     counter++;
+                 }
+                      if (father_death == 0 && mother_death == 0){
+                          if (((2015-father_birth)-births_collections[counter])>80||(((2015-mother_birth)-births_collections[counter])>60))
+                               System.out.println("ERROR !"+names_collections[counter]+"\t\t"+(2015-births_collections[counter])+"\t\t"+(2015-father_birth)+"\t\t"+(2015-mother_birth));
+                              else
+                      System.out.println(names_collections[counter]+"\t\t"+(2015-births_collections[counter])+"\t\t"+(2015-father_birth)+"\t\t"+(2015-mother_birth));
+                      } else if(father_death != 0 && mother_death != 0){
+                           if (((father_death-father_birth)-births_collections[counter])>80||(((mother_death-mother_birth)-births_collections[counter])>60)||(mother_death-mother_birth)<0)
+                        System.out.println("ERROR !"+names_collections[counter]+"\tERROR! "+(2015-births_collections[counter])+"\tERROR! "+(father_death-father_birth)+"\tERROR! "+(mother_death-mother_birth)); 
+                           else
+                        System.out.println(names_collections[counter]+"\t\t"+(2015-births_collections[counter])+"\t\t"+(father_death-father_birth)+"\t\t"+(mother_death-mother_birth));
+                      }
+                      
+                      
+                 line= read.readLine();
+                 counter=0;
+                 }
+             }
+     
+     
+     }
+     
+     
+     }
+     public static void US15()throws Exception{
+     System.out.println("------------------------\n"); 
+     System.out.println("US15");  
+     System.out.println("-----Families-----");
+     int counter = 0;
+     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+     String line="";
+          while (read.ready()){
+              counter =0;
+          line = read.readLine();
+                       if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+                       String [] splits = line.split(" ");
+                           System.out.println(splits[1].replaceAll("@", " ")); 
+                           line =read.readLine();
+                          line = read.readLine();
+                           line = read.readLine();
+                           while (line.contains("CHIL")){
+                           counter ++;
+                          line = read.readLine();
+                           }
+                           if(counter > 15){
+                           System.out.println("~~~ERROR ! Number of siblings in this family is  "+counter+"  ERROR !~~~");
+                           }else{
+                           System.out.println("Number of siblings in this family is  "+counter);
+                           }
+                           
+                           counter = 0;
+                       }
+          }
+     
+     }
+    
     
     
          public static void US05()throws Exception{
