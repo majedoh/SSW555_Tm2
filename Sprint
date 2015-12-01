@@ -250,7 +250,64 @@ public class P02 {
     US09();
     US12();
     US15();
+    US23();
+    US30();
     }
+    
+         public static void US23()throws Exception{
+     System.out.println("------------------------\n"); 
+     System.out.println("US23"); 
+     System.out.println("NAME\t\tDate of Birth\t\tStatus"); 
+     int counter =0;
+     int second = 0;
+     boolean uniqe = true;
+     while (counter < universal_counter){
+         while (second < universal_counter){
+            if (counter == second)
+              second++;
+            else if (names_collections[counter].equalsIgnoreCase(names_collections[second])&&births_collections[counter] == births_collections[second]){
+                 uniqe = false; 
+                 break;        
+             }else
+               second++;
+         }
+         if (uniqe == true){
+         System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\t\tUniqe");
+         }else{
+         System.out.println("ERROR !"+names_collections[counter]+"\t\t"+births_collections[counter]+"\t\t~~~~~NOT Uniqe~~~~");
+         }
+         
+     uniqe = true ;
+     second = 0 ;
+     counter ++;
+     }
+     
+     }
+     public static void US30()throws Exception{
+      System.out.println("------------------------\n"); 
+   System.out.println("US30");  
+   System.out.println("Name\t\tMirrage");
+   int counter =0;
+   while (counter < universal_counter){
+    
+       if (mirrage_collections[counter]!=0 && Divorce_Date[counter]!=0){
+    System.out.println(names_collections[counter]+"\t\t"+"~~~ Divorced");
+   }
+       
+   if (mirrage_collections[counter]!=0 && Death_colection[counter]==0){
+       if ((Divorce_Date[counter]<mirrage_collections[counter]))
+        System.out.println(names_collections[counter]+"\t\tMarried");
+   }else if (mirrage_collections[counter]!=0 && Death_colection[counter]!=0){
+        System.out.println(names_collections[counter]+"\t\t"+"~~~ DEAD");
+   
+   } 
+   
+   counter++;
+   }
+     
+     }
+     
+    
     
     
          public static void US12()throws Exception{
