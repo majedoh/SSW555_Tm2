@@ -238,13 +238,105 @@ public class P02 {
     //US21();
     
     //Sprint 3
-        US22();
-        US38();
-        US29();
-        US31();
-        US03();
-        US04();
+       // US22();
+       //US38();
+       // US29();
+       // US31();
+       // US03();
+       // US04();
+    
+    // Sprint 4
+    US05();
+    US09();
     }
+    
+    
+         public static void US05()throws Exception{
+   System.out.println("------------------------\n"); 
+   System.out.println("US05");  
+   System.out.println("Name\t\tMirrage\t\tDeath");
+   int counter =0;
+   while (counter < universal_counter){
+   if (mirrage_collections[counter]!=0){
+   if (Death_colection[counter]!=0){
+       if (Death_colection[counter]<mirrage_collections[counter])
+           System.out.println("ERROR!"+names_collections[counter]+"\t\tERROR!"+mirrage_collections[counter]+"\t\tERROR!"+Death_colection[counter]);
+       else
+   System.out.println(names_collections[counter]+"\t\t"+mirrage_collections[counter]+"\t\t"+Death_colection[counter]);
+   }else{
+       System.out.println(names_collections[counter]+"\t\t"+mirrage_collections[counter]+"\t\tStill Mirried");
+   }
+   }else{
+   System.out.println(names_collections[counter]+"\t\tNOt Mirried"+"\tNOt Mirried");
+   }
+   counter++;
+   }
+     
+     }
+     public static void US09()throws Exception{
+         String [] IDs =getId_id_collection_prime();
+     System.out.println("------------------------\n"); 
+     System.out.println("US09");  
+     System.out.println("Name\t\tBirth\t\tFather Death\tMother Death");
+     int counter = 0;
+     BufferedReader read = new BufferedReader(new FileReader("My-Family-14-Sep-2015.ged"));
+      String line="";
+     while (read.ready()){
+               counter= 0;
+              line= read.readLine();
+             if(line.contains("0")&& line.contains("@F")&&line.contains("FAM")){
+                 line= read.readLine();
+                 String []  splits = line.split(" ");
+                 String father = splits[2];
+                 line= read.readLine();
+                 splits = line.split(" ");
+                 String mother = splits[2];
+                 while (!IDs[counter].equals(father)){
+                     counter++;
+                 }
+                 int father_death = Death_colection[counter];
+                 counter = 0;
+                  while (!IDs[counter].equals(mother)){
+                     counter++;
+                 }
+                 int mother_death = Death_colection[counter];
+                  counter = 0;
+                 line= read.readLine();
+                 while (line.contains("CHIL")){
+                     splits = line.split(" ");
+                      while (!IDs[counter].equals(splits[2])){
+                     counter++;
+                 }
+                      if (father_death == 0 && mother_death == 0){
+                      System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\tStill Alive\tStill Alive");
+                      }else if (mother_death == 0){
+                          if (father_death<births_collections[counter])
+                              System.out.println("ERROR"+names_collections[counter]+"\t"+births_collections[counter]+"\tERROR"+father_death+"\t\tStill Alive");
+                          else
+                       System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\t"+father_death+"\t\tStill Alive");
+                      
+                      }else if (father_death==0){
+                          if (mother_death<births_collections[counter])
+                              System.out.println("ERROR !"+names_collections[counter]+"\t\t"+births_collections[counter]+"\tStill Alive"+"\tERROR"+mother_death);
+                              else
+                      System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\tStill Alive"+"\t"+mother_death);
+                      }
+                      else{
+                        if  (father_death<births_collections[counter]|| mother_death<births_collections[counter])
+                      System.out.println("ERROR! "+names_collections[counter]+"\t"+births_collections[counter]+"\t\tERROR! "+father_death+"\tERROR"+mother_death);
+                      else
+                           System.out.println(names_collections[counter]+"\t\t"+births_collections[counter]+"\t\t"+father_death+"\t\t"+mother_death);
+                      }
+                      
+                 line= read.readLine();
+                 counter=0;
+                 }
+             }
+     
+     
+     }
+     
+     }
     
     
     public static void US22()throws Exception{
